@@ -1,0 +1,13 @@
+body {
+    background: #673be1;
+    background: linear-gradient(to right, #09080c, #f7f4f8);
+    min-height: 100vh;
+    overflow-x:hidden;
+}
+logo-container img {
+    position: absolute; 
+    top: 0;
+      right: 0;
+    float: center;
+    object-position: center ;
+    }

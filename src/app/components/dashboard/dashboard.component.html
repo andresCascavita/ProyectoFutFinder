@@ -1,0 +1,37 @@
+
+<section class="hero">
+  <header id="header">
+      <div class="logo-container">
+          <img src="https://i.postimg.cc/bJBsYmRY/image-removebg-preview.png" >
+      </div>
+    
+    <nav>
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2 " (click)="logOut()">LogOut</button> 
+        <button>Contactenos</button>
+        <font color="white">
+        <p class="fs-5 text-muted" style="background-color: aquamarine ; float: left;">{{ dataUser?.email }}</p>  
+      </font>
+      </div>              
+    </nav>
+  </header>
+  <header class="hero-header">
+    
+
+
+  </header>
+  <footer class="hero-footer">
+    <Form (submit)="jugar()">
+      <button type="submit" class="btn btn-outline-primary me-2 " >Jugar</button>
+    </Form>
+   
+    
+  </footer>
+</section>
+<article>
+  <h2 id="mt">Nosotros somos FutFinder</h2>
+  <p>FutFinder es una aplicacion echa atravez de Angular para poder ver partidos cercanos a ti y jugar con nuevas personas que necesiten un jugador para una posicion especifica</p>
+  <p>Venimos aqui para ayudarte a buscar con quien jugar facil y sencillo, atravez de la web con tan solo un click</p>
+  <p>Nacimos como un aplicativo para una materia de desarrollo web en el año 2023, diseñada por Miguel Fernandez, Gustavo Cascavita y Felipe Rivera.</p>
+  <img src="poner direccion del logo" style="background-position: center;"> 
+</article>
