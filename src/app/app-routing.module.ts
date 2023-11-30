@@ -10,7 +10,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { CrearPartidoComponent } from './components/crear-partido/crear-partido.component';
 import { ListaDePartidosComponent } from './components/lista-de-partidos/lista-de-partidos.component';
 import { AgregarPartidoComponent } from './components/agregar-partido/agregar-partido.component';
-// import { loginGuard } from './guards/login.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,11 +18,11 @@ const routes: Routes = [
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'menu', component: MenuComponent, },
-  { path: 'history', component: HistoryComponent},
-  { path: 'crearPartido', component: AgregarPartidoComponent },
-  { path: 'listaDePartidos',component:ListaDePartidosComponent},
+  { path: 'dashboard', component: DashboardComponent , canActivate: [LoginGuard]},
+  { path: 'menu', component: MenuComponent, canActivate: [LoginGuard] },
+  { path: 'history', component: HistoryComponent, canActivate: [LoginGuard]},
+  { path: 'crearPartido', component: AgregarPartidoComponent, canActivate: [LoginGuard] },
+  { path: 'listaDePartidos',component:ListaDePartidosComponent, canActivate: [LoginGuard]},
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 

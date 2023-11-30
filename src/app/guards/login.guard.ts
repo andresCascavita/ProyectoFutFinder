@@ -1,5 +1,20 @@
-import { LoginComponent } from "../components/login/login.component";
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
-export const loginGuard = ()=> {
-    if(indexedDB){}
+@Injectable({
+    providedIn: 'root'
+})
+export class LoginGuard implements CanActivate {
+
+    constructor(private cookieService: CookieService, private router: Router) { }
+
+    canActivate(): boolean {
+        if (this.cookieService.check('userDocId')) {
+            return true;
+        } else {
+            this.router.navigate(['/login']);
+            return false;
+        }
+    }
 }
