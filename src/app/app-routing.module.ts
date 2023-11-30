@@ -9,6 +9,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HistoryComponent } from './components/history/history.component';
 import { CrearPartidoComponent } from './components/crear-partido/crear-partido.component';
 import { ListaDePartidosComponent } from './components/lista-de-partidos/lista-de-partidos.component';
+import { AgregarPartidoComponent } from './components/agregar-partido/agregar-partido.component';
 // import { loginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'menu', component: MenuComponent, },
   { path: 'history', component: HistoryComponent},
-  { path: 'crearPartido', component: CrearPartidoComponent },
-  { path: 'listaDePatidos',component:ListaDePartidosComponent},
+  { path: 'crearPartido', component: AgregarPartidoComponent },
+  { path: 'listaDePartidos',component:ListaDePartidosComponent},
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 

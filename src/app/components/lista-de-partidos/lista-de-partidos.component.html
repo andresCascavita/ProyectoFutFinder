@@ -1,80 +1,39 @@
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-          <form [formGroup]="enviarCheck" (ngSubmit)="submitCrear()" >
-            <span class="h3"> Lista de partidos</span>
+  <div class="card">
+      <div class="card-body">
+        <form [formGroup]="enviarCheck" (ngSubmit)="submitCrear()" >
+          <span class="h3"> Lista de partidos</span>
+        
+          <button type="submit" class="btn btn-dark btn-lg" style="float: right;" routerLink="/crearPartido">Agregar</button>
           
-            <button type="submit" class="btn btn-dark btn-lg" style="float: right;" routerLink="/crearPartido">Agregar</button>
-            
-            <table class="table table-striped mt-3">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cancha</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Creador</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Posicion</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Observaciones</th>
-                    <th scope="col">Confirmar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <div *ngFor="let dato of place">
-                    <tr>
-                      <th scope="row">1</th>
-                      <td > {{ dato.nombreCancha }}</td>
-                      <td>{{ dato.Direccion }}</td>
-                      <td>Gustavo cascavita</td>
-                      <td>3224193423</td>
-                      <td>delantero</td>
-                      <td>28/11/23</td>
-                      <td>5:00 pm</td>
-                      <td>traer camisa blanca y para el arbitraje</td>
-                      <td> 
-                        <input type="checkbox" id="check" (change)="onCheckboxChange($event)">                      
-                      </td>
-                      </tr>
-                  </div>
-                 
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>el campin</td>
-                    <td>calle 34 #23-85 </td>
-                    <td>felipe rivera</td>
-                    <td>3203161085</td>
-                    <td>defensa</td>
-                    <td>30/11/23</td>
-                    <td>7:00 am</td>
-                    <td>llevar camisa roja y 5 mil </td>
-                    <td> 
-                      <input type="checkbox" id="check" (change)="onCheckboxChange($event)">                      
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td >el charquito </td>
-                    <td>cra 6a #14-99 sur</td>
-                    <td>miguel Fernadez</td>
-                    <td >3115467666 </td>
-                    <td>volante</td>
-                    <td>25/11/23</td>
-                    <td>9:30 pm</td>
-                    <td>camisa azul y canilleras</td>
-                    <td> 
-                      <input type="checkbox" id="check" (change)="onCheckboxChange($event)">                      
-                    </td>
-                  </tr>
-                </tbody>
-                
-              </table>
-              <ul>
-                
-              </ul>
-              
-            </form>
-        </div>
-    </div>
+          <table class="table table-striped mt-3">
+            <tr>
+              <th scope="col">Cancha</th>
+              <th scope="row">Direccion</th>
+              <th scope="col">Creador</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Posicion</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>
+              <th scope="col">Observaciones</th>
+              <th scope="col">Confirmar</th>
+            </tr>
+          
+            <tr *ngFor="let dato of place">
+              <td>{{ dato.nombreCancha }}</td>
+              <td>{{ dato.Direccion }}</td>
+              <td>{{ dato.Creador }}</td>
+              <td>{{ dato.Telefono }}</td>
+              <td>{{ dato.Posicion }}</td>
+              <td>{{ dato.Fecha }}</td>
+              <td>{{ dato.Hora }}</td>
+              <td>{{ dato.Observaciones }}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-outline-success" (click)="asistir(dato)">Asistir</button>
+              </td>
+            </tr>
+          </table>          
+        </form>
+      </div>
+  </div>
 </div>

@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { FirebasePartidosService } from 'src/app/services/firebase-partidos.service';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+import { Firestore, doc, getDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-crear-partido',
@@ -11,40 +13,38 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./crear-partido.component.css']
 })
 export class CrearPartidoComponent implements OnInit {
-  
-  enviarCheck = new FormGroup({
-    isChecked: new FormControl(false),
-  });
-
 
   cretePartido: FormGroup;
   submitted = false;
+  dataUser: any;
 
   constructor
-      ( private fb:FormBuilder,
-        private FirebasePartidosService: FirebasePartidosService,
-        private afAuth: AngularFireAuth,
-        private router: Router,
-        private toastr: ToastrService
-        ) {
-    this.cretePartido= this.fb.group({
-      nombreCancha:['',Validators.required],
-      Direccion:['',Validators.required],
-      Creador:['',Validators.required],
-      Telefono:['',Validators.required],
-      Posicion:['',Validators.required],
-      Fecha:['',Validators.required],
-      Hora:['',Validators.required],
-      Observaciones:['',Validators.required]
+    (private fb: FormBuilder,
+      private FirebasePartidosService: FirebasePartidosService,
+      private afAuth: AngularFireAuth,
+      private router: Router,
+      private firestore: Firestore,
+      private cookies: CookieService,
+      private toastr: ToastrService
+    ) {
+    this.cretePartido = this.fb.group({
+      nombreCancha: ['', Validators.required],
+      Direccion: ['', Validators.required],
+      Creador: ['', Validators.required],
+      Telefono: ['', Validators.required],
+      Posicion: ['', Validators.required],
+      Fecha: ['', Validators.required],
+      Hora: ['', Validators.required],
+      Observaciones: ['', Validators.required]
     })
-   }
-   async agregarPartido(){
+  }
+  async agregarPartido() {
     this.submitted = true;
-    
-    if(this.cretePartido.invalid){
+
+    if (this.cretePartido.invalid) {
       return;
     }
-    const partido: any ={
+    const partido: any = {
       nombreCancha: this.cretePartido.value.nombreCancha,
       Direccion: this.cretePartido.value.Direccion,
       Creador: this.cretePartido.value.Creador,
@@ -56,37 +56,22 @@ export class CrearPartidoComponent implements OnInit {
 
     }
 
-    this.FirebasePartidosService.addPartido(partido).then(()=>{
-      this.toastr.success('El partido fue registrado con exito','Partido Registrado')
+    this.FirebasePartidosService.addPartido(partido).then(() => {
+      this.toastr.success('El partido fue registrado con exito', 'Partido Registrado')
       this.router.navigate(['/listaDePatidos']);
     })
-
-
-  
-   }
-  
-  submitConfirmar(){
-    const isCheckedControl = this.enviarCheck.get('isChecked');
-  
-  if (isCheckedControl) {
-    const isChecked = isCheckedControl.value;
-    console.log('Valor de la casilla de verificación al confirmar:', isChecked);
-    
-    // Lógica adicional para el botón "Confirmar" aquí
-  } else {
-    console.error('Error: isCheckedControl es nulo.');
-  }
   }
 
-  submit(): void{}
-  submitCrear(){
-    
+  submit(): void { }
+  submitCrear() {
+
   }
 
-
-  ngOnInit(): void {
+  async ngOnInit() {
+    const userDocId = this.cookies.get('userDocId');
+    const userRef = doc(this.firestore, `usuarios/${userDocId}`);
+    const userDoc = await getDoc(userRef);
+    this.dataUser = userDoc.data();
+    console.log("Información del Usuario de Firestore:", this.dataUser);
   }
-
-
-
 }

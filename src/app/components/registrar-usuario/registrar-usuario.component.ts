@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FirebaseCodeErrorService } from 'src/app/services/firebase-code-error.service';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -19,6 +20,7 @@ export class RegistrarUsuarioComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
     private router: Router,
+    private firestore: Firestore,
     private firebaseError: FirebaseCodeErrorService
   ) {
     this.registrarUsuario = this.fb.group({
@@ -28,27 +30,33 @@ export class RegistrarUsuarioComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   registrar() {
     const email = this.registrarUsuario.value.email;
     const password = this.registrarUsuario.value.password;
-    const repetirPassowrd = this.registrarUsuario.value.repetirPassword;
-
-    console.log(this.registrarUsuario);
-    if (password !== repetirPassowrd) {
-      this.toastr.error(
-        'Las contraseñas ingresadas deben ser las mismas',
-        'Error'
-      );
+    const repetirPassword = this.registrarUsuario.value.repetirPassword;
+  
+    if (password !== repetirPassword) {
+      this.toastr.error('Las contraseñas ingresadas deben ser las mismas', 'Error');
       return;
     }
-
+  
     this.loading = true;
-    this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+    this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const userRef = collection(this.firestore, 'usuarios');
+        return addDoc(userRef, {
+          email: email,
+          // otros campos que necesites
+        });
+      })
+      .then((docRef) => {
+        // Aquí docRef.id es el ID del documento Firestore
+        return this.verificarCorreo();
+      })
       .then(() => {
-        this.verificarCorreo();
+        this.router.navigate(['/ruta-post-registro']);
       })
       .catch((error) => {
         this.loading = false;

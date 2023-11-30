@@ -1,0 +1,15 @@
+logo-container img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1px;
+    /* Ajusta la altura según tus necesidades */
+
+}
+
+body {
+    background: #673be1;
+    background: linear-gradient(to right, #09080c, #f7f4f8);
+    min-height: 100vh;
+    overflow-x: hidden;
+}

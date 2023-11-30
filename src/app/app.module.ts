@@ -22,8 +22,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CrearPartidoComponent } from './components/crear-partido/crear-partido.component';
 import { ListaDePartidosComponent } from './components/lista-de-partidos/lista-de-partidos.component';
 import { getFirestore } from 'firebase/firestore';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { CookieService } from 'ngx-cookie-service'
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { CookieService } from 'ngx-cookie-service';
+import { AgregarPartidoComponent } from './components/agregar-partido/agregar-partido.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CookieService } from 'ngx-cookie-service'
     SpinnerComponent,
     CrearPartidoComponent,
     ListaDePartidosComponent,
+    AgregarPartidoComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +47,9 @@ import { CookieService } from 'ngx-cookie-service'
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     FirestoreModule, provideFirebaseApp(() => initializeApp(environment.firebase)),
-    
+
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig},CookieService],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig }, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

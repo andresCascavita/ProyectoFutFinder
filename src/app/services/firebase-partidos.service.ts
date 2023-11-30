@@ -1,8 +1,6 @@
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData } from '@angular/fire/firestore'
+import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
 import { CrearPartidoComponent } from '../components/crear-partido/crear-partido.component'
-import { CollectionReference, addDoc, collection } from 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 
@@ -10,6 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class FirebasePartidosService{
   cretePartido: any;
 
