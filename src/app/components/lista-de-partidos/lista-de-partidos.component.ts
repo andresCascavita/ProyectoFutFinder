@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { deleteDoc, collection, doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { deleteDoc, doc, Firestore, getDoc } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { collectionData } from '@angular/fire/firestore';
-import { } from '@angular/fire/firestore'
 import { FirebasePartidosService } from 'src/app/services/firebase-partidos.service';
 import { __values } from 'tslib';
 import { Router } from '@angular/router';
